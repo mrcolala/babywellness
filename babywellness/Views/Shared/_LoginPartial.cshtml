@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var username = Context.Session.GetString("Username");
+    var displayName = Context.Session.GetString("DisplayName");
+}
+
+<ul class="navbar-nav">
+    @if (!string.IsNullOrEmpty(username))
+    {
+        <li class="nav-item">
+            <span class="nav-link text-dark">Hello @displayName!</span>
+        </li>
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+</ul>
